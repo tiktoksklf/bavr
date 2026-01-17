@@ -13,8 +13,9 @@ export default async function handler(req, res) {
           quantity: 1
         }
       ],
-      success_url: "https://YOUR-VERCEL-URL/success.html",
-      cancel_url: "https://YOUR-VERCEL-URL/cancel.html"
+          success_url: "https://bavr.vercel.app/success.html",
+          cancel_url: "https://bavr.vercel.app/cancel.html",
+
     });
 
     res.status(200).json({ url: session.url });
