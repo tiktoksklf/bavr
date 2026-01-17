@@ -10,7 +10,7 @@ export default async function handler(req, res) {
       mode: "payment",
       line_items: [
         {
-          price: "price_1SqPDYGMXTzHRJNuO0q58a8n",
+          price: "prod_To2YZMn1rcSJ1L",
           quantity: 1
         }
       ],
