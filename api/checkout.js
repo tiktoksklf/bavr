@@ -1,10 +1,11 @@
-
 import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export default async function handler(req, res) {
   try {
+    const origin = req.headers.origin;
+
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       line_items: [
@@ -13,13 +14,13 @@ export default async function handler(req, res) {
           quantity: 1
         }
       ],
-          success_url: "https://bavr.vercel.app/success.html",
-          cancel_url: "https://bavr.vercel.app/cancel.html",
-
+      success_url: `${origin}/success.html`,
+      cancel_url: `${origin}/cancel.html`,
     });
 
-    res.status(200).json({ url: session.url });
+    return res.status(200).json({ url: session.url });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    console.error(err);
+    return res.status(500).json({ error: err.message });
   }
 }
