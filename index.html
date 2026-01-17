@@ -1,11 +1,166 @@
-<script>
-async function buy() {
-  const res = await fetch("/api/checkout", {
-    method: "POST"
-  });
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Velocity Performance</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  const data = await res.json();
-  window.location.href = data.url;
-}
-</script>
-<button onclick="buy()">Buy Now</button>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, Helvetica, sans-serif; }
+    body { background: #0b0b0b; color: #fff; }
+
+    header {
+      background: #000;
+      padding: 20px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #222;
+    }
+    header h1 { font-size: 22px; letter-spacing: 2px; }
+    nav a { margin-left: 30px; color: #aaa; text-decoration: none; font-size: 14px; }
+    nav a:hover { color: #fff; }
+
+    .hero {
+      height: 80vh;
+      background: linear-gradient(120deg, #000, #141414);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px;
+    }
+    .hero h2 { font-size: 56px; max-width: 700px; }
+    .hero p { margin: 20px 0; font-size: 18px; color: #aaa; }
+    .hero button {
+      width: fit-content;
+      padding: 14px 28px;
+      background: #e10600;
+      border: none;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .shop { padding: 80px; text-align: center; }
+    .shop h3 { font-size: 36px; margin-bottom: 40px; }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+    }
+
+    .card { background: #111; padding: 25px; border-radius: 8px; }
+    .card img { width: 100%; border-radius: 6px; margin-bottom: 15px; }
+    .card h4 { margin-bottom: 10px; }
+    .price { color: #e10600; margin-bottom: 15px; font-size: 18px; }
+
+    .card button {
+      width: 100%;
+      padding: 12px;
+      background: #e10600;
+      border: none;
+      color: white;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .card button:hover { filter: brightness(1.08); }
+
+    footer {
+      background: #000;
+      text-align: center;
+      padding: 30px;
+      color: #777;
+      border-top: 1px solid #222;
+    }
+
+    @media (max-width: 768px) {
+      header { padding: 20px; }
+      .hero { padding: 40px; text-align: center; }
+      .hero h2 { font-size: 38px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>VELOCITY</h1>
+    <nav>
+      <a href="#shop">Shop</a>
+      <a href="#builds">Builds</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>PERFORMANCE WITHOUT COMPROMISE</h2>
+    <p>Premium parts for street and track builds.</p>
+    <button id="shopNowBtn">Shop Now</button>
+  </section>
+
+  <section id="shop" class="shop">
+    <h3>Featured Parts</h3>
+
+    <div class="products">
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1617814070974-8c2df1d95e59" alt="Performance Part" />
+        <h4>High-Flow Performance Part</h4>
+        <div class="price">$499.99</div>
+        <button class="buyBtn" data-price="price_1SqPDYGMXTzHRJNuO0q58a8n">Buy Now</button>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70" alt="Track Upgrade" />
+        <h4>Track-Spec Upgrade</h4>
+        <div class="price">$899.99</div>
+        <button class="buyBtn" data-price="price_1SqPDYGMXTzHRJNuO0q58a8n">Buy Now</button>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1549921296-3fd62c4a04d4" alt="Boosted Kit" />
+        <h4>Boosted Essentials Kit</h4>
+        <div class="price">$1,299.99</div>
+        <button class="buyBtn" data-price="price_1SqPDYGMXTzHRJNuO0q58a8n">Buy Now</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Velocity Performance. All rights reserved.
+  </footer>
+
+  <script>
+    // Smooth scroll to shop
+    document.getElementById("shopNowBtn").addEventListener("click", () => {
+      document.getElementById("shop").scrollIntoView({ behavior: "smooth" });
+    });
+
+    async function startCheckout(priceId) {
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ priceId })
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        alert(data?.error || "Checkout failed");
+        return;
+      }
+
+      window.location.href = data.url;
+    }
+
+    // Wire all Buy buttons
+    document.querySelectorAll(".buyBtn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        startCheckout(btn.dataset.price);
+      });
+    });
+  </script>
+
+</body>
+</html>
