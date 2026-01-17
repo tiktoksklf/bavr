@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>BAVR Performance - Contact</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, Helvetica, sans-serif; }
+    body { background: #0b0b0b; color: #fff; }
+
+    header {
+      background: #000;
+      padding: 20px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #222;
+    }
+    header h1 { font-size: 22px; letter-spacing: 2px; }
+    nav a { margin-left: 30px; color: #aaa; text-decoration: none; font-size: 14px; }
+    nav a:hover { color: #fff; }
+
+    /* Contact Hero */
+    .hero {
+      min-height: 55vh;
+      background: linear-gradient(120deg, #000, #141414);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px;
+    }
+    .hero h2 { font-size: 56px; max-width: 800px; }
+    .hero p { margin: 20px 0 0; font-size: 18px; color: #aaa; max-width: 780px; }
+
+    /* Contact Section */
+    .contact {
+      padding: 80px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 30px;
+      align-items: start;
+    }
+
+    .card {
+      background: #111;
+      padding: 25px;
+      border-radius: 8px;
+      border: 1px solid #1a1a1a;
+    }
+
+    .card h3 {
+      font-size: 26px;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+    }
+
+    .muted { color: #aaa; line-height: 1.6; }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    label {
+      display: block;
+      font-size: 12px;
+      letter-spacing: 1px;
+      color: #aaa;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      background: #0e0e0e;
+      border: 1px solid #222;
+      color: #fff;
+      padding: 12px 12px;
+      border-radius: 6px;
+      outline: none;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      border-color: #e10600;
+      box-shadow: 0 0 0 2px rgba(225, 6, 0, 0.15);
+    }
+
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      width: fit-content;
+      padding: 14px 22px;
+      background: #e10600;
+      border: none;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    .btn:hover { filter: brightness(1.08); }
+
+    .btn.secondary {
+      background: transparent;
+      border: 1px solid #2a2a2a;
+      color: #ddd;
+    }
+    .btn.secondary:hover { border-color: #3a3a3a; }
+
+    /* Info list */
+    .info-list {
+      margin-top: 14px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .info-item {
+      background: #0e0e0e;
+      border: 1px solid #222;
+      border-radius: 6px;
+      padding: 14px;
+    }
+
+    .info-item .k {
+      color: #aaa;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .info-item .v {
+      color: #fff;
+      font-size: 15px;
+      line-height: 1.5;
+      word-break: break-word;
+    }
+
+    .info-item a { color: #fff; text-decoration: none; }
+    .info-item a:hover { color: #e10600; }
+
+    .note {
+      margin-top: 16px;
+      color: #777;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    footer {
+      background: #000;
+      text-align: center;
+      padding: 30px;
+      color: #777;
+      border-top: 1px solid #222;
+    }
+
+    @media (max-width: 900px) {
+      header { padding: 20px; }
+      .hero { padding: 40px; text-align: center; }
+      .hero h2 { font-size: 38px; }
+      .contact { padding: 40px 20px; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>BAVR performance</h1>
+    <nav>
+      <a href="index.html">Shop</a>
+      <a href="builds.html">Builds</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>CONTACT BAVR PERFORMANCE</h2>
+    <p>Questions about tunes, parts, or your build? Send a message and we’ll get back to you.</p>
+  </section>
+
+  <section class="contact">
+    <div class="contact-grid">
+      <!-- Contact Form -->
+      <div class="card">
+        <h3>Send a Message</h3>
+        <p class="muted">Fill this out and we’ll reply ASAP. If it’s about a tune, include your year/make/model and any mods.</p>
+
+        <!-- Option A: Formspree style (change action to your endpoint) -->
+        <form id="contactForm" action="#" method="POST">
+          <div class="form-row">
+            <div>
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" placeholder="Your name" required />
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="you@email.com" required />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div>
+              <label for="topic">Topic</label>
+              <select id="topic" name="topic">
+                <option value="general">General</option>
+                <option value="tuning">Tuning</option>
+                <option value="orders">Orders</option>
+                <option value="support">Support</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div>
+              <label for="vehicle">Vehicle (optional)</label>
+              <input id="vehicle" name="vehicle" type="text" placeholder="e.g. 2007 Mustang GT" />
+            </div>
+          </div>
+
+          <div style="margin-top: 16px;">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Tell us what you need..." required></textarea>
+          </div>
+
+          <div class="actions">
+            <button class="btn" type="submit">Send Message</button>
+            <button class="btn secondary" type="button" id="clearBtn">Clear</button>
+          </div>
+
+          <p class="note" id="formNote">
+            Tip: If you’re contacting about a tune, list: mods, fuel (93/E85), and what you want (idle chop, rev limit, etc.).
+          </p>
+        </form>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="card">
+        <h3>Direct Contact</h3>
+        <p class="muted">Prefer reaching out directly? Use the info below.</p>
+
+        <div class="info-list">
+          <div class="info-item">
+            <div class="k">Email</div>
+            <div class="v"><a href="mailto:support@bavrperformance.com">support@bavrperformance.com</a></div>
+          </div>
+
+          <div class="info-item">
+            <div class="k">Business Hours</div>
+            <div class="v">Mon–Fri: 10AM–6PM<br/>Sat: 12PM–4PM<br/>Sun: Closed</div>
+          </div>
+
+          <div class="info-item">
+            <div class="k">Response Time</div>
+            <div class="v">Usually within 24–48 hours.</div>
+          </div>
+
+          <div class="info-item">
+            <div class="k">Social</div>
+            <div class="v">
+              <a href="#" target="_blank" rel="noopener noreferrer">Instagram</a> •
+              <a href="#" target="_blank" rel="noopener noreferrer">TikTok</a> •
+              <a href="#" target="_blank" rel="noopener noreferrer">YouTube</a>
+            </div>
+          </div>
+        </div>
+
+        <p class="note">
+          Replace the email + socials with your real links. If you want this form to actually send emails, point the form
+          <code style="color:#aaa;">action</code> to your backend endpoint (or Formspree).
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 BAVR Performance. All rights reserved.
+  </footer>
+
+  <script>
+    // Clear button
+    document.getElementById("clearBtn").addEventListener("click", () => {
+      document.getElementById("contactForm").reset();
+    });
+
+    // Optional: Front-end only success message (does NOT send emails unless you wire the form action/server)
+    document.getElementById("contactForm").addEventListener("submit", (e) => {
+      // If you don't have a backend yet, prevent submit and show a message.
+      // Remove the next 2 lines once your form action is set up.
+      e.preventDefault();
+
+      const note = document.getElementById("formNote");
+      note.textContent = "Message queued (demo). Hook this form to /api/contact or a form service to send emails.";
+      note.style.color = "#aaa";
+    });
+  </script>
+</body>
+</html>
